@@ -10,7 +10,7 @@ namespace KordamineOOP
     {
         public enum toug { Mops, Buldog, ShibaInu}; //tõug - порода
         public toug loomaToug;
-        public Koer(toug toug, string nimi, string varv, sugu loomaSugu, double kaal, int vanus, bool elav = false) : base(nimi, varv, loomaSugu, kaal, vanus, elav)
+        public Koer(toug toug, string nimi, string varv, sugu loomaSugu, double kaal, int vanus) : base(nimi, varv, loomaSugu, kaal, vanus)
         {
             this.loomaToug = toug;
         }   
@@ -22,7 +22,6 @@ namespace KordamineOOP
             this.loomaSugu = koer.loomaSugu;
             this.kaal = koer.kaal;
             this.vanus = koer.vanus;
-            this.elav = koer.elav;
             this.loomaToug = koer.loomaToug;
         }
 
@@ -30,10 +29,12 @@ namespace KordamineOOP
         {
             Console.WriteLine("KuKu");
         }
-        
-        public override void print_Info()
+
+        public override string print_Info()
         {
-            Console.WriteLine($"{loomaToug} {varv} {nimi} ta on {loomaSugu} ja tema kaal on {kaal} ja ta on {vanus} aastat vana");
+            string text = $"Tõug on {loomaToug}, Värv on {varv}, Nimi on {nimi}, ta on {loomaSugu} ja tema kaal on {kaal} ja ta on {vanus} aastat vana, nahaalsus on {nahaalsus}";
+            Console.WriteLine($"Tõug on {loomaToug}, Värv on {varv}, Nimi on {nimi}, ta on {loomaSugu} ja tema kaal on {kaal} ja ta on {vanus} aastat vana, nahaalsus on {nahaalsus}");
+            return text;
         }
 
         public void muudaNimi(string uusNimi) { nimi = uusNimi; }
