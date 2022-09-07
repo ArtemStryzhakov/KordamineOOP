@@ -28,23 +28,38 @@ raccoonList.Add(raccoonAndrei);
 
 using (StreamWriter writer = new StreamWriter("C:\\Users\\opilane\\source\\repos\\Artem Stryzhakov TARpv20\\raccoon.txt"))
 {
-	foreach (Koduloom x in raccoonList)
+    Console.WriteLine("\n----Raccoon----");
+	foreach (Koduloom Object in raccoonList)
 	{
-        writer.WriteLine(x.nimi + "," + x.nahaalsus + ",");
+        writer.WriteLine($"{Object.nimi}, {Object.loomaSugu}, {Object.vanus}, {Object.nahaalsus}");
     }
 }
-Console.WriteLine("\n");
-List<Raccoon> tootajad = new List<Raccoon>();
-StreamReader sr = new StreamReader("C:\\Users\\opilane\\source\\repos\\Artem Stryzhakov TARpv20\\raccoon.txt");
-string text;
-while ((text = sr.ReadLine()) != null)
+
+List<Raccoon> raccoons = new List<Raccoon>();
+
+using (StreamReader reader = new StreamReader("C:\\Users\\opilane\\source\\repos\\Artem Stryzhakov TARpv20\\raccoon.txt"))
 {
-    string[] rida = text.Split(',');
-    tootajad.Add(new Raccoon(rida[0], rida[1]));
+    string text;
+    while ((text = reader.ReadLine()) != null)
+    {
+        string[] row = text.Split(',');
+        raccoons.Add(new Raccoon(row[0], ConvertToEnum(row[1]), Convert.ToInt32(row[2]), row[3]));
+    }
+
+    foreach (var item in raccoons)
+    {
+        Console.WriteLine($"Nimi: {item.nimi}, Sugu: {item.loomaSugu}, Vanus: {item.vanus}, Nahaalsus: {item.nahaalsus}");
+    }
 }
-sr.Close();
-foreach (var item in tootajad)
+
+Koduloom.sugu ConvertToEnum(string data)
 {
-    Console.WriteLine($"Nimi: {item.nimi}, Nahaalsus: {item.nahaalsus}");
+    if (data == " isane")
+    {
+        return Koduloom.sugu.isane;
+    }
+    else
+    {
+        return Koduloom.sugu.emane;
+    }
 }
-Console.ReadLine();
